@@ -1,12 +1,13 @@
-import { postbackPayload } from "../constants/postbackPayload";
+import { postbackPayload } from "../constants/postbackPayload.js";
 
-require("dotenv").config();
-const request = require("request");
+import { config } from "dotenv";
+config();
+import axios from "axios";
 const getHomePage = (req, res) => {
   return res.render("home.ejs");
 };
 
-const setupProfile = (req, res) => {
+const setupProfile = async (req, res) => {
   // Construct the message body
   let requestBody = {
     get_started: { payload: postbackPayload.getStarted },
@@ -16,29 +17,29 @@ const setupProfile = (req, res) => {
     greeting: [
       {
         locale: "default",
-        text: "Xin chào, {{user_first_name}}! Tôi là Vody 24/7 Chatbot. Tôi có thể cung cấp cho bạn thông tin về sản phẩm cũng như các chương trình khuyến mãi của Vody, hãy nhấn vào 'Bắt đầu' để bắt đầu trò chuyện với tôi!",
+        text: "Xin chào, {{user_first_name}}! Tôi là Vody 24/7 Chatbot. Hãy nhấn vào 'Bắt đầu' để bắt đầu trò chuyện với tôi!",
       },
     ],
   };
 
   // Send the HTTP request to the Messenger Platform
-  request(
-    {
-      uri: "https://graph.facebook.com/v10.0/me/messenger_profile",
-      qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
-      method: "POST",
-      json: requestBody,
-    },
-    (err, _res, _body) => {
-      if (!err) {
-        console.log("Profile set!");
-        res.status(200).send("Profile set!");
-      } else {
-        console.error("Unable to set profile:" + err);
-        res.sendStatus(500);
-      }
-    }
-  );
+  try {
+    const response = await axios({
+      method: "post",
+      url: `https://graph.facebook.com/v10.0/me/messenger_profile?access_token=${process.env.PAGE_ACCESS_TOKEN}`,
+      headers: { "Content-Type": "application/json" },
+      data: requestBody,
+    });
+    // handle response here
+    console.log("Profile set!");
+    res.status(200).send("Profile set!");
+  } catch (error) {
+    // handle error here
+    console.error(error.response.data);
+    console.error(error.response.status);
+    console.error(error.response.headers);
+    res.sendStatus(500);
+  }
 };
 
 export const homeController = {

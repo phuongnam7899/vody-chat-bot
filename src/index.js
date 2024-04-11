@@ -1,10 +1,11 @@
 "use strict";
 
-import { viewEngine } from "./configs/viewEngine";
+import { viewEngine } from "./configs/viewEngine.js";
 import express from "express";
-import { urlencoded, json } from "body-parser";
-import { initWebRoutes } from "./routes/web";
-require("dotenv").config();
+import bodyParser from "body-parser";
+import { initWebRoutes } from "./routes/web.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 // Use dotenv to read .env vars into Node
@@ -15,10 +16,10 @@ viewEngine(app);
 app.set("view engine", "ejs");
 
 // Parse application/x-www-form-urlencoded
-app.use(urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Parse application/json
-app.use(json());
+app.use(bodyParser.json());
 
 initWebRoutes(app);
 
