@@ -1,6 +1,5 @@
 "use strict";
 
-const { homeController } = require("./controllers");
 import { viewEngine } from "./configs/viewEngine";
 import express from "express";
 import { urlencoded, json } from "body-parser";
