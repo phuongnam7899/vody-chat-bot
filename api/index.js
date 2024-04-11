@@ -26,3 +26,5 @@ initWebRoutes(app);
 app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + process.env.PORT);
 });
+
+export default app;

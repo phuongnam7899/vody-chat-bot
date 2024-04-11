@@ -12,7 +12,7 @@ const setupProfile = async (req, res) => {
   let requestBody = {
     get_started: { payload: postbackPayload.getStarted },
     whitelisted_domains: [
-      "https://vody-facebook-chat-bot-a4118a8dfb66.herokuapp.com/",
+      "https://vody-chat-4daiscyss-nams-projects-81152b37.vercel.app/",
     ],
     greeting: [
       {
