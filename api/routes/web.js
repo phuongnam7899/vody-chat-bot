@@ -1,7 +1,8 @@
 import express from "express";
+import { homeController } from "../controllers/homeController.js";
+import { webHooksController } from "../controllers/webHooksController.js";
 
 const router = express.Router();
-import { homeController, webHooksController } from "../controllers";
 
 export const initWebRoutes = (app) => {
   router.get("/", homeController.getHomePage);

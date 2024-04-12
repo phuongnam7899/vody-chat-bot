@@ -1,5 +1,4 @@
-import request from "request";
-import { callSendAPI } from "../utils/callSendAPI";
+import { callSendAPI } from "../utils/callSendAPI.js";
 
 const handlePostbackNotFound = async (senderPsid, payload) => {
   try {

@@ -1,7 +1,7 @@
 import express from "express";
 
 export const viewEngine = (app) => {
-  app.use(express.static("src/public"));
+  app.use(express.static("api/public"));
   app.set("view engine", "ejs");
-  app.set("views", "src/views");
+  app.set("views", "api/views");
 };

@@ -1,6 +1,6 @@
-import { postbackPayload } from "../constants/postbackPayload";
-import chatbotService from "../services/chatbotService";
-import { callSendAPI } from "../utils/callSendAPI";
+import { postbackPayload } from "../constants/postbackPayload.js";
+import chatbotService from "../services/chatbotService.js";
+import { callSendAPI } from "../utils/callSendAPI.js";
 
 const getWebhook = (req, res) => {
   // Your verify token. Should be a random string.
